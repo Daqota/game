@@ -37,6 +37,12 @@ int main(int argc, char* argv[])
                 running = false;
                 break;
             }
+            if (event.type == SDL_KEYDOWN) {
+
+            }
+            if (event.type == SDL_KEYUP) {
+
+            }
         }
 
     }
