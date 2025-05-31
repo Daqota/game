@@ -20,13 +20,22 @@ int main(int argc, char* argv[])
         SDL_WINDOW_SHOWN
     );
 
+    
     if (window == nullptr) {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();
         return 1;
     }
+    
+    //setup renderer
+    SDL_Renderer* screen = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    //make sure renderer works
+    if (screen == nullptr) {
+        std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        return 1;
+    }
 
-    //create sdl poll event 
+    //create sdl poll event for user input
     SDL_Event event;
 
     while (running) {
@@ -38,7 +47,7 @@ int main(int argc, char* argv[])
                 break;
             }
             if (event.type == SDL_KEYDOWN) {
-
+                event.key
             }
             if (event.type == SDL_KEYUP) {
 
