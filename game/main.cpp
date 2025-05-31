@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include <iostream>
 
+bool running = true;
+
 int main(int argc, char* argv[])
 {
     // Initialize SDL
@@ -24,8 +26,22 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    //create sdl poll event 
+    SDL_Event event;
+
+    while (running) {
+        //poll events
+        //should move this code to the input layer for key handling
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                running = false;
+                break;
+            }
+        }
+
+    }
     // Keep window open for 3 seconds
-    SDL_Delay(3000);
+    //SDL_Delay(3000);
 
     // Clean up
     SDL_DestroyWindow(window);
