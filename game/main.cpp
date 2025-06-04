@@ -28,12 +28,15 @@ int main(int argc, char* argv[])
     }
     
     //setup renderer
-    SDL_Renderer* screen = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     //make sure renderer works
-    if (screen == nullptr) {
+    if (renderer == nullptr) {
         std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
         return 1;
     }
+
+    //enables the use of opacity in SDL funtions
+    //SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     //create sdl poll event for user input
     SDL_Event event;
@@ -47,18 +50,32 @@ int main(int argc, char* argv[])
                 break;
             }
             if (event.type == SDL_KEYDOWN) {
-                event.key
+                event.key;
             }
             if (event.type == SDL_KEYUP) {
 
             }
         }
+        // Set background color (e.g., dark blue)
+        SDL_SetRenderDrawColor(renderer, 0, 0, 64, 255);
+        SDL_RenderClear(renderer);
+
+        // Set draw color for rectangle (e.g., red)
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+        // Define rectangle
+        SDL_Rect rect = { 200, 150, 400, 300 };
+
+        // Draw filled rectangle
+        SDL_RenderFillRect(renderer, &rect);
+
+        // Show result
+        SDL_RenderPresent(renderer);
 
     }
-    // Keep window open for 3 seconds
-    //SDL_Delay(3000);
 
     // Clean up
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
