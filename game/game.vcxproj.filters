@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\kat.jpg">
+    <Image Include="..\..\..\..\Downloads\kat.bmp">
       <Filter>Source Files</Filter>
     </Image>
   </ItemGroup>
