@@ -1,3 +1,6 @@
+#include <SDL.h>
+#include <iostream>
+
 
 void game(SDL_Renderer* renderer) {
 	// Set background color (e.g., dark blue)
