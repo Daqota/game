@@ -1,3 +1,5 @@
+#include <SDL.h>
+#include <iostream>
 
 #include "game.cpp"
 #include "input.cpp"
