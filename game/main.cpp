@@ -1,5 +1,8 @@
-#include <SDL.h>
-#include <iostream>
+
+#include "game.cpp"
+#include "input.cpp"
+#include "rendering.cpp"
+#include "utils.cpp"
 
 bool running = true;
 
@@ -36,7 +39,7 @@ int main(int argc, char* argv[])
     }
 
     //enables the use of opacity in SDL funtions
-    //SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     //create sdl poll event for user input
     SDL_Event event;
@@ -56,21 +59,7 @@ int main(int argc, char* argv[])
 
             }
         }
-        // Set background color (e.g., dark blue)
-        SDL_SetRenderDrawColor(renderer, 0, 0, 64, 255);
-        SDL_RenderClear(renderer);
-
-        // Set draw color for rectangle (e.g., red)
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
-        // Define rectangle
-        SDL_Rect rect = { 200, 150, 400, 300 };
-
-        // Draw filled rectangle
-        SDL_RenderFillRect(renderer, &rect);
-
-        // Show result
-        SDL_RenderPresent(renderer);
+        game(renderer);
 
     }
 
