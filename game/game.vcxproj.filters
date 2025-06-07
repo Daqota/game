@@ -34,4 +34,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\kat.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
