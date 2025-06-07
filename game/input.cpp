@@ -1,0 +1,1 @@
+void input(SDL_Event event, bool &running){}
