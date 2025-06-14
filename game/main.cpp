@@ -4,7 +4,7 @@
 #include "rendering.cpp"
 #include "utils.cpp"
 
-bool running = true;
+
 
 int main(int argc, char* argv[])
 {
@@ -43,22 +43,12 @@ int main(int argc, char* argv[])
 
     //create sdl poll event for user input
     SDL_Event event;
+    bool running = true;
 
     while (running) {
         //poll events
         //should move this code to the input layer for key handling
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-                break;
-            }
-            if (event.type == SDL_KEYDOWN) {
-                event.key;
-            }
-            if (event.type == SDL_KEYUP) {
-
-            }
-        }
+        input(event, running);
         game(renderer);
 
     }
