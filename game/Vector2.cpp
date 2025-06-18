@@ -39,5 +39,15 @@ public:
 		return newVec;
 	}
 
-	
+	float dot(Vector2 vec1, Vector2 vec2) {
+		float product;
+		product = vec1.x * vec2.x + vec1.y * vec2.y;
+		return product;
+	}
+
+	float cross(Vector2 vec1, Vector2 vec2) {
+		float product;
+		product = vec1.x * vec2.y - vec2.x * vec1.y;
+		return product;
+	}
 };
