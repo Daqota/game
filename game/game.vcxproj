@@ -141,6 +141,7 @@
     <ClCompile Include="utils.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\kat.bmp" />
