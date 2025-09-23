@@ -1,7 +1,4 @@
-#include <SDL.h>
-#include <iostream>
-#include <vector>
-#include "simpleObject.cpp"
+
 
 //should make vector classes for this stuff
 simpleObject cube = simpleObject();
@@ -15,20 +12,21 @@ std::vector<simpleObject> objects = {
 };
 
 
-void game(SDL_Renderer* renderer) {
+void game(SDL_Renderer* renderer, Input* input) {
 	// Set background color (e.g., dark blue)
 	SDL_SetRenderDrawColor(renderer, 0, 0, 64, 255);
 	SDL_RenderClear(renderer);
 
-	//loop through all the objects in the objects list and render them
-	for (int i = 0; i < objects.size(); i++) {
-		simpleObject cur_obj = objects[i];
-		SDL_SetRenderDrawColor(renderer, cur_obj.r, cur_obj.g, cur_obj.b, cur_obj.a);
+	if (input->buttons[BUTTON_UP].is_down) {
+		//loop through all the objects in the objects list and render them
+		for (int i = 0; i < objects.size(); i++) {
+			simpleObject cur_obj = objects[i];
+			SDL_SetRenderDrawColor(renderer, cur_obj.r, cur_obj.g, cur_obj.b, cur_obj.a);
 
-		SDL_Rect rect = { cur_obj.x, cur_obj.y, cur_obj.w, cur_obj.h, };
-		SDL_RenderFillRect(renderer, &rect);
+			SDL_Rect rect = { cur_obj.x, cur_obj.y, cur_obj.w, cur_obj.h, };
+			SDL_RenderFillRect(renderer, &rect);
+		}
 	}
-
 	// Set draw color for rectangle (e.g., red)
 	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 

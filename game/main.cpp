@@ -1,9 +1,13 @@
 
-#include "game.cpp"
+#include <SDL.h>
+#include <iostream>
+#include <vector>
+
+#include "simpleObject.cpp"
 #include "input.cpp"
 #include "rendering.cpp"
 #include "utils.cpp"
-
+#include "game.cpp"
 
 
 int main(int argc, char* argv[])
@@ -44,12 +48,14 @@ int main(int argc, char* argv[])
     //create sdl poll event for user input
     SDL_Event event;
     bool running = true;
-
+    
     while (running) {
         //poll events
         //should move this code to the input layer for key handling
-        input(event, running);
-        game(renderer);
+        //input_handling(event, running);
+
+        handle_input(event, running);
+        game(renderer, &input);
 
     }
 
@@ -59,6 +65,4 @@ int main(int argc, char* argv[])
     SDL_Quit();
 
     return 0;
-//your mom gay
-// nu uh!
 }
