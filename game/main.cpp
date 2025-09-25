@@ -50,12 +50,9 @@ int main(int argc, char* argv[])
     bool running = true;
     
     while (running) {
-        //poll events
-        //should move this code to the input layer for key handling
-        //input_handling(event, running);
-
+        float dt = .01;
         handle_input(event, running);
-        game(renderer, &input);
+        game(renderer, &input, dt);
 
     }
 

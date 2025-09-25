@@ -11,21 +11,34 @@ std::vector<simpleObject> objects = {
 	simpleObject(500, 300, 200, 200, 255, 0, 255, 255)
 };
 
+float sx = 0;
+float sy = 0;
 
-void game(SDL_Renderer* renderer, Input* input) {
+void game(SDL_Renderer* renderer, Input* input, float& dt) {
+	float ax = 0.;
+	float ay = 0.;
 	// Set background color (e.g., dark blue)
 	SDL_SetRenderDrawColor(renderer, 0, 0, 64, 255);
 	SDL_RenderClear(renderer);
 
-	if (input->buttons[BUTTON_UP].is_down) {
-		//loop through all the objects in the objects list and render them
-		for (int i = 0; i < objects.size(); i++) {
-			simpleObject cur_obj = objects[i];
-			SDL_SetRenderDrawColor(renderer, cur_obj.r, cur_obj.g, cur_obj.b, cur_obj.a);
+	if (input->buttons[BUTTON_LEFT].is_down) ax -= 1000.;
+	if (input->buttons[BUTTON_RIGHT].is_down) ax += 1000.;
+	if (input->buttons[BUTTON_UP].is_down) ay -= 1000.;
+	if (input->buttons[BUTTON_DOWN].is_down) ay += 1000.;
 
-			SDL_Rect rect = { cur_obj.x, cur_obj.y, cur_obj.w, cur_obj.h, };
-			SDL_RenderFillRect(renderer, &rect);
-		}
+	sx += ax * dt - .01 * sx;
+	sy += ay * dt - .01 * sy;
+	
+	objects[2].x += sx * dt;
+	objects[2].y += sy * dt;
+	
+	//loop through all the objects in the objects list and render them
+	for (int i = 0; i < objects.size(); i++) {
+		simpleObject cur_obj = objects[i];
+		SDL_SetRenderDrawColor(renderer, cur_obj.r, cur_obj.g, cur_obj.b, cur_obj.a);
+
+		SDL_Rect rect = { cur_obj.x, cur_obj.y, cur_obj.w, cur_obj.h, };
+		SDL_RenderFillRect(renderer, &rect);
 	}
 	// Set draw color for rectangle (e.g., red)
 	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
