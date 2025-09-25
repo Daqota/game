@@ -1,36 +1,26 @@
 
-
-//should make vector classes for this stuff
-simpleObject cube = simpleObject();
-//simpleObject cube2 = simpleObject(100., 100., 500., 500., 255, 0, 0, 255);
-//simpleObject cube3 = simpleObject(500, 300, 200, 200, 255, 0, 255, 255);
+Vector2 p_velocity = Vector2(0., 0.);
+Vector2 p_acceleration = Vector2(0., 0.);
+simpleObject player = simpleObject(100., 100., 50., 50., 0, 0, 255, 255);
 
 std::vector<simpleObject> objects = {
-	cube,
-	simpleObject(100., 100., 500., 500., 255, 0, 0, 255),
-	simpleObject(500, 300, 200, 200, 255, 0, 255, 255)
+	player,
 };
 
-float sx = 0;
-float sy = 0;
+void game(SDL_Renderer* renderer, Input* input, double& dt) {
+	p_acceleration.x = 0.;
+	p_acceleration.y = 0.;
 
-void game(SDL_Renderer* renderer, Input* input, float& dt) {
-	float ax = 0.;
-	float ay = 0.;
 	// Set background color (e.g., dark blue)
 	SDL_SetRenderDrawColor(renderer, 0, 0, 64, 255);
 	SDL_RenderClear(renderer);
 
-	if (input->buttons[BUTTON_LEFT].is_down) ax -= 1000.;
-	if (input->buttons[BUTTON_RIGHT].is_down) ax += 1000.;
-	if (input->buttons[BUTTON_UP].is_down) ay -= 1000.;
-	if (input->buttons[BUTTON_DOWN].is_down) ay += 1000.;
+	if (input->buttons[BUTTON_LEFT].is_down) p_acceleration.x -= 1000.;
+	if (input->buttons[BUTTON_RIGHT].is_down) p_acceleration.x += 1000.;
+	if (input->buttons[BUTTON_UP].is_down) p_acceleration.y -= 1000.;
+	if (input->buttons[BUTTON_DOWN].is_down) p_acceleration.y += 1000.;
 
-	sx += ax * dt - .01 * sx;
-	sy += ay * dt - .01 * sy;
-	
-	objects[2].x += sx * dt;
-	objects[2].y += sy * dt;
+	move2d(&objects[0].x, &objects[0].y, &p_velocity, p_acceleration, dt);
 	
 	//loop through all the objects in the objects list and render them
 	for (int i = 0; i < objects.size(); i++) {
@@ -40,15 +30,6 @@ void game(SDL_Renderer* renderer, Input* input, float& dt) {
 		SDL_Rect rect = { cur_obj.x, cur_obj.y, cur_obj.w, cur_obj.h, };
 		SDL_RenderFillRect(renderer, &rect);
 	}
-	// Set draw color for rectangle (e.g., red)
-	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
-	// Define rectangle
-	//SDL_Rect rect = { 200, 150, 400, 300 };
-
-	// Draw filled rectangle
-	//SDL_RenderFillRect(renderer, &rect);
-
 	// Show result
 	SDL_RenderPresent(renderer);
 }

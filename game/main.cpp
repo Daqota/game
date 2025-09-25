@@ -48,9 +48,19 @@ int main(int argc, char* argv[])
     //create sdl poll event for user input
     SDL_Event event;
     bool running = true;
+
+    // Setup for time tracking
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
+    double dt = 0;
     
     while (running) {
-        float dt = .01;
+
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+
+        dt = static_cast<double>(NOW - LAST) / SDL_GetPerformanceFrequency();
+    
         handle_input(event, running);
         game(renderer, &input, dt);
 
